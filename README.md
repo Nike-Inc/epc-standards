@@ -15,15 +15,15 @@ Optional<Sgtin> sgtin = epc.scheme().sgtin();
 
 Tags can be decoded from hex encoded bytes or raw bytes (`byte[]` or `ByteBuffer`).
 
-Currently only SGTIN-96 and a custom Nike display tag format (XNDT) is supported. See [Issue 2](https://github.com/Nike-Inc/epc-standards/issues/2) for up to date progress on supporting more formats.
+Currently only SGTIN-96 and a custom Nike display tag format (XNDT) are supported. See [Issue 2](https://github.com/Nike-Inc/epc-standards/issues/2) for up to date progress on supporting more formats.
 
 ## Performance
 
-A major goal of epc-standards is to be fast. We've included some basic benchmarks for sgtin and xndt tags. More will be added as support for more tag formats is added. Any tags that have a third party parsing library will be included in the benchmarks for comparision purposes. Currently sgtin parsing in epc-standards is compared to sgtin parsing from [epctagcoder](https://github.com/jlcout/epctagcoder).
+A major goal of epc-standards is to be fast. We've included some basic benchmarks for SGTIN and XNDT tags. More will be added as support for more tag formats is added. Any tags that have a third party parsing library will be included in the benchmarks for comparision purposes. Currently SGTIN parsing in epc-standards is compared to SGTIN parsing from [epctagcoder](https://github.com/jlcout/epctagcoder).
 
 ### SGTIN parsing performance compared to epctagcoder
 
-The graph below was produced using a Mid 2015 MacBook Pro.
+The graph below was produced using a mid 2015 MacBook Pro.
 
 ![benchmark][benchmark img]
 
