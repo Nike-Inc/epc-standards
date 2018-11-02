@@ -13,7 +13,6 @@ import org.scalameter.picklers.Implicits._
 import org.epctagcoder.parse.SGTIN.ParseSGTIN
 import com.nike.epc.decode._
 import com.nike.epc.util._
-import com.nike.epc.decode.record._
 
 object DecodeBench extends Bench.OfflineRegressionReport {
 
@@ -27,6 +26,15 @@ object DecodeBench extends Bench.OfflineRegressionReport {
       using(sgtinHexes) in { hexes =>
         hexes.foreach { hex =>
           Decoding.decode(hex)
+        }
+      }
+    }
+
+    measure method "ParseSGTIN.Builder().withRFIDTag" in {
+      using(sgtinHexes) in { hexes =>
+        hexes.foreach { hex =>
+          val epc = ParseSGTIN.Builder().withRFIDTag(hex).build()
+          epc.getSGTIN()
         }
       }
     }
