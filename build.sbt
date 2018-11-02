@@ -7,7 +7,6 @@
  *
  */
 import sbt.Keys.javacOptions
-import Dependencies._
 
 // This allows coursier to work as an alternative resolver. See:
 // https://github.com/maichler/sbt-jupiter-interface/tree/0.7.0#usage
