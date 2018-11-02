@@ -7,7 +7,7 @@ epc-standards implements decoding of GS1 EPC tags.
 Example:
 
 ``` java
-import com.nike.epc.decode;
+import com.nike.epc.decode.Decoding;
 
 Epc epc = Decoding.decode("30185E78003ECB006E2DA00E");
 Optional<Sgtin> sgtin = epc.scheme().sgtin();
