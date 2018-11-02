@@ -62,23 +62,24 @@ public class RawBitsTest {
   void getByteWithPadding() {
     RawBits bits = RawBits.fromHex("CF0F"); // 1100 1111 0000 1111
 
-    assertEquals((byte) 103, bits.getByte(0, 1)); // 0110 0111
-    assertEquals((byte) 39, bits.getByte(1, 2)); // 0010 0111
-    assertEquals((byte) 7, bits.getByte(2, 3)); // 0000 0111
+    assertEquals((byte) 103, bits.getByte(0, 7)); // 0110 0111
+    assertEquals((byte) 39, bits.getByte(1, 6)); // 0010 0111
+    assertEquals((byte) 7, bits.getByte(2, 5)); // 0000 0111
     assertEquals((byte) 7, bits.getByte(3, 4)); // 0000 0111
-    assertEquals((byte) 7, bits.getByte(4, 5)); // 0000 0111
-    assertEquals((byte) 3, bits.getByte(5, 6)); // 0000 0011
-    assertEquals((byte) 1, bits.getByte(6, 7)); // 0000 0001
-    assertEquals((byte) 67, bits.getByte(7, 1)); // 0100 0011
-    assertEquals((byte) 3, bits.getByte(8, 2)); // 0000 0011
-    assertEquals((byte) 3, bits.getByte(9, 3)); // 0000 0011
+    assertEquals((byte) 7, bits.getByte(4, 3)); // 0000 0111
+    assertEquals((byte) 3, bits.getByte(5, 2)); // 0000 0011
+    assertEquals((byte) 1, bits.getByte(6, 1)); // 0000 0001
+    assertEquals((byte) 67, bits.getByte(7, 7)); // 0100 0011
+    assertEquals((byte) 3, bits.getByte(8, 6)); // 0000 0011
+    assertEquals((byte) 3, bits.getByte(9, 5)); // 0000 0011
     assertEquals((byte) 3, bits.getByte(10, 4)); // 0000 0011
-    assertEquals((byte) 3, bits.getByte(11, 5)); // 0000 0011
-    assertEquals((byte) 3, bits.getByte(12, 6)); // 0000 0011
-    assertEquals((byte) 1, bits.getByte(13, 7)); // 0000 0001
-    assertEquals((byte) 0, bits.getByte(14, 8)); // 0000 0000
-    assertEquals((byte) 0, bits.getByte(15, 9)); // 0000 0000
-    assertEquals((byte) 0, bits.getByte(16, 10)); // 0000 0000
+    assertEquals((byte) 3, bits.getByte(11, 3)); // 0000 0011
+    assertEquals((byte) 3, bits.getByte(12, 2)); // 0000 0011
+    assertEquals((byte) 1, bits.getByte(13, 1)); // 0000 0001
+    assertEquals((byte) 0, bits.getByte(14, 0)); // 0000 0000
+
+    assertEquals((byte) 15, bits.getByte(0, 16)); // 0000 1111
+    assertEquals((byte) 0, bits.getByte(0, 32)); // 0000 0000
   }
 
   @Test

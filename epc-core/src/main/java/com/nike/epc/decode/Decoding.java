@@ -8,7 +8,6 @@
  */
 package com.nike.epc.decode;
 
-import com.nike.epc.decode.record.sgtin.*;
 import com.nike.epc.model.*;
 import com.nike.epc.model.sgtin.*;
 import com.nike.epc.model.xndt.*;
@@ -33,8 +32,8 @@ public interface Decoding {
   public static Epc decode(RawBits bits) throws Exception {
     byte header = bits.getByte(0);
     CodingScheme codingScheme = CodingScheme.fromByte(header);
-    byte filter = bits.getByte(8, 5);
-    int partition = bits.getByte(11, 5);
+    byte filter = bits.getByte(8, 3);
+    int partition = bits.getByte(11, 3);
     return buildEpc(header, filter, partition, codingScheme.bitCount, bits);
   }
 

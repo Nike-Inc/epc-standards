@@ -159,21 +159,11 @@ public class RawBits {
   }
 
   public byte getByte(int offset) {
-    return getByte(offset, 0);
+    return getByte(offset, 8);
   }
 
-  // @TODO: make this take a count of bits to consider instead of a count of left padding
-  public byte getByte(int offset, int leftPad) {
-    byte out = (byte) 0;
-    for (int i = 0 + leftPad; i < 8; i++) {
-      boolean set = bits.get(offset + (i - leftPad));
-
-      if (set) {
-        out |= 1 << (7 - i);
-      }
-    }
-
-    return out;
+  public byte getByte(int offset, int count) {
+    return (byte) bitsToDecimal(offset, count);
   }
 
   public String getDecimalString(int offset) {
