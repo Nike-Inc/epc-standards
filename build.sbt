@@ -24,7 +24,7 @@ bintrayOrganization in ThisBuild := Some("nike")
 bintrayRepository in ThisBuild := "maven"
 bintrayPackage in ThisBuild := "epc-standards"
 
-version in ThisBuild := sys.env.getOrElse("TRAVIS_TAG", "0-SNAPSHOT")
+version in ThisBuild := sys.env.get("TRAVIS_TAG").filter(_.trim.nonEmpty).getOrElse("0-SNAPSHOT")
 
 lazy val ci = TaskKey[Unit]("ci")
 
