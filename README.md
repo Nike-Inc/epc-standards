@@ -17,13 +17,49 @@ Tags can be decoded from hex encoded bytes or raw bytes (`byte[]` or `ByteBuffer
 
 Currently only SGTIN-96 and a custom Nike display tag format (XNDT) are supported. See [Issue 2](https://github.com/Nike-Inc/epc-standards/issues/2) for up to date progress on supporting more formats.
 
+## Usage
+
+Currently epc-standards has no artifacts published. The easiest way to get going right now is to publish locally with sbt:
+
+``` shell
+$ sbt publishLocal
+```
+
+Then in your project you can include the dependency.
+
+### SBT
+
+``` scala
+libraryDependencies += "com.nike.epc" % "epc-core" % "0-SNAPSHOT"
+```
+
+### Gradle
+
+``` groovy
+compile group: 'com.nike.epc', name: 'epc-core', version: '0-SNAPSHOT'
+```
+
+### Maven
+
+``` xml
+<dependency>
+  <groupId>com.nike.epc</groupId>
+  <artifactId>epc-core</artifactId>
+  <version>0-SNAPSHOT</version>
+</dependency>
+```
+
 ## Performance
 
 A major goal of epc-standards is to be fast. We've included some basic benchmarks for SGTIN and XNDT tags. More will be added as support for more tag formats is added. Any tags that have a third party parsing library will be included in the benchmarks for comparision purposes. Currently SGTIN parsing in epc-standards is compared to SGTIN parsing from [epctagcoder](https://github.com/jlcout/epctagcoder).
 
 ### SGTIN parsing performance compared to epctagcoder
 
-The graph below was produced using a mid 2015 MacBook Pro.
+The graph below was produced using a mid 2015 MacBook Pro using the following command from the root of the project:
+
+``` shell
+$ sbt bench:test
+```
 
 ![benchmark][benchmark img]
 
