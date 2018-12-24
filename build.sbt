@@ -37,7 +37,7 @@ lazy val `epc-standards` = (project in file("."))
         }
       } else {
         Def.task {
-          publish.dependsOn((`epc-core` / (jacoco in Test))).value
+          (`epc-core` / publish).dependsOn((`epc-core` / (jacoco in Test))).value
         }
       }
     }.value
