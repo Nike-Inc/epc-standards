@@ -8,6 +8,8 @@
  */
 package com.nike.epc.model.gsin;
 
+import com.nike.epc.model.DecodedUri;
+
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /**
@@ -18,7 +20,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  * <p>In the epc uris, the companyPrefix and shipperReference will both be zero padded such that
  * when they are concatenated, the resultant string is 17 digits.
  */
-public class Gsin {
+public class Gsin extends DecodedUri.Unimplemented {
   private final String companyPrefix, shipperReference;
 
   private Gsin(String companyPrefix, String shipperReference) {

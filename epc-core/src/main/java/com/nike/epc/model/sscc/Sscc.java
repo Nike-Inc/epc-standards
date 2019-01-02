@@ -8,9 +8,11 @@
  */
 package com.nike.epc.model.sscc;
 
+import com.nike.epc.model.DecodedUri;
+
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
-public final class Sscc {
+public final class Sscc extends DecodedUri.Unimplemented {
   private final String companyPrefix, extension, serialReference;
 
   private Sscc(String companyPrefix, String extension, String serialReference) {

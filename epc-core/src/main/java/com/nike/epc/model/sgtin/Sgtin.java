@@ -12,15 +12,37 @@ import com.nike.epc.model.*;
 
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
-public final class Sgtin {
+public final class Sgtin implements DecodedUri {
   private final String companyPrefix, indicator, gs1ItemReference, serialNumber;
+  private final int size;
+  private final byte filter;
 
   private Sgtin(
-      String companyPrefix, String indicator, String gs1ItemReference, String serialNumber) {
+      String companyPrefix,
+      String indicator,
+      String gs1ItemReference,
+      String serialNumber,
+      int size,
+      byte filter) {
     this.companyPrefix = companyPrefix;
     this.indicator = indicator;
     this.gs1ItemReference = gs1ItemReference;
     this.serialNumber = serialNumber;
+    this.size = size;
+    this.filter = filter;
+  }
+
+  @Override
+  public String tagUri() {
+    return String.format(
+        "urn:epc:tag:sgtin-%d:%s.%s.%s.%s",
+        size, filter, companyPrefix(), itemReference(), serialNumber());
+  }
+
+  @Override
+  public String pureIdentityUri() {
+    return String.format(
+        "urn:epc:id:sgtin:%s.%s.%s", companyPrefix(), itemReference(), serialNumber());
   }
 
   public String companyPrefix() {
@@ -78,7 +100,7 @@ public final class Sgtin {
     return String.format("%s%s%s%s", indicator, companyPrefix, gs1ItemReference, checkDigit());
   }
 
-  public static Sgtin fromBits(RawBits bits, int partition) {
+  public static Sgtin fromBits(RawBits bits, int partition, int size, byte filter) {
     TableItem tableItem = SgtinPartitionTableList.getPartitionByValue(partition);
     String companyPrefix = bits.getDecimalString(14, tableItem.getM(), tableItem.getL());
     int itemReferenceStart = 14 + tableItem.getM();
@@ -92,50 +114,52 @@ public final class Sgtin {
         notNullOrEmpty(companyPrefix),
         notNullOrEmpty(indicator),
         notNullOrEmpty(itemReference),
-        notNullOrEmpty(serialNumber));
+        notNullOrEmpty(serialNumber),
+        size,
+        filter);
   }
 
-  public static final class Builder {
-    private String companyPrefix, indicator, gs1ItemReference, serialNumber;
+  // public static final class Builder {
+  //   private String companyPrefix, indicator, gs1ItemReference, serialNumber;
 
-    private Builder() {}
+  //   private Builder() {}
 
-    public Builder withCompanyPrefix(String companyPrefix) {
-      this.companyPrefix = companyPrefix;
-      return this;
-    }
+  //   public Builder withCompanyPrefix(String companyPrefix) {
+  //     this.companyPrefix = companyPrefix;
+  //     return this;
+  //   }
 
-    public Builder withIndicator(String indicator) {
-      this.indicator = indicator;
-      return this;
-    }
+  //   public Builder withIndicator(String indicator) {
+  //     this.indicator = indicator;
+  //     return this;
+  //   }
 
-    public Builder withItemReference(String indicatorPlusGs1ItemReference) {
-      this.indicator = indicatorPlusGs1ItemReference.substring(0, 1);
-      this.gs1ItemReference = indicatorPlusGs1ItemReference.substring(1);
-      return this;
-    }
+  //   public Builder withItemReference(String indicatorPlusGs1ItemReference) {
+  //     this.indicator = indicatorPlusGs1ItemReference.substring(0, 1);
+  //     this.gs1ItemReference = indicatorPlusGs1ItemReference.substring(1);
+  //     return this;
+  //   }
 
-    public Builder withGs1ItemReference(String itemReference) {
-      this.gs1ItemReference = itemReference;
-      return this;
-    }
+  //   public Builder withGs1ItemReference(String itemReference) {
+  //     this.gs1ItemReference = itemReference;
+  //     return this;
+  //   }
 
-    public Builder withSerialNumber(String serialNumber) {
-      this.serialNumber = serialNumber;
-      return this;
-    }
+  //   public Builder withSerialNumber(String serialNumber) {
+  //     this.serialNumber = serialNumber;
+  //     return this;
+  //   }
 
-    public Sgtin build() {
-      return new Sgtin(
-          notNullOrEmpty(companyPrefix),
-          notNullOrEmpty(indicator),
-          notNullOrEmpty(gs1ItemReference),
-          notNullOrEmpty(serialNumber));
-    }
-  }
+  //   public Sgtin build() {
+  //     return new Sgtin(
+  //         notNullOrEmpty(companyPrefix),
+  //         notNullOrEmpty(indicator),
+  //         notNullOrEmpty(gs1ItemReference),
+  //         notNullOrEmpty(serialNumber));
+  //   }
+  // }
 
-  public static Builder builder() {
-    return new Builder();
-  }
+  // public static Builder builder() {
+  //   return new Builder();
+  // }
 }

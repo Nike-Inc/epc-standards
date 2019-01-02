@@ -84,18 +84,7 @@ public class Epc {
    * <p>SGTIN: urn:epc:id:sgtin:PaddedCompanyPrefix.PaddedItemRef.SerialNumber
    */
   public String pureIdentityUri() {
-    if (scheme.isSgtin()) {
-      return scheme
-          .sgtin()
-          .map(
-              sgtin ->
-                  String.format(
-                      "urn:epc:id:sgtin:%s.%s.%s",
-                      sgtin.companyPrefix(), sgtin.itemReference(), sgtin.serialNumber()))
-          .orElseThrow(() -> new IllegalStateException("tag appeared to be an sgtin, but wasn't"));
-    } else {
-      throw new IllegalArgumentException("pureIdentityUri not yet implemented for this scheme");
-    }
+    return scheme.pureIdentityUri();
   }
 
   /*
@@ -105,23 +94,7 @@ public class Epc {
    *  required at write time.
    */
   public String tagUri() {
-    if (scheme.isSgtin()) {
-      return scheme
-          .sgtin()
-          .map(
-              sgtin ->
-                  String.format(
-                      "urn:epc:tag:sgtin-%d:%s.%s.%s.%s",
-                      size,
-                      filter,
-                      sgtin.companyPrefix(),
-                      sgtin.itemReference(),
-                      sgtin.serialNumber()))
-          .orElseThrow(() -> new IllegalStateException("tag appeared to be an sgtin, but wasn't"));
-
-    } else {
-      throw new IllegalArgumentException("tagUri not yet implemented for this scheme");
-    }
+    return scheme.tagUri();
   }
 
   private static final Integer SGTIN_96_SERIAL_BIT_SIZE = 38;

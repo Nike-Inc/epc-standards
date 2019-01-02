@@ -51,7 +51,7 @@ public interface Decoding {
       case 0x2F: // US_DOD_96;
         throw new UnsupportedOperationException("US_DOD_96");
       case 0x30: // SGTIN_96;
-        Sgtin sgtin = Sgtin.fromBits(bits, partition);
+        Sgtin sgtin = Sgtin.fromBits(bits, partition, size, filter);
         return new Epc("AI 414 + AI 254", filter, partition, size, EpcScheme.sgtin(sgtin), bits);
       case 0x31: // SSCC_96;
         throw new UnsupportedOperationException("SSCC_96");
@@ -88,7 +88,7 @@ public interface Decoding {
       case 0x41: // ITIP_212;
         throw new UnsupportedOperationException("ITIP_212");
       case 0xE3: // XNDT_96;
-        Xndt xndt = Xndt.fromBits(bits);
+        Xndt xndt = Xndt.fromBits(bits, size);
         return new Epc("UNSPECIFIED", filter, partition, size, EpcScheme.xndt(xndt), bits);
       default:
         throw new UnsupportedOperationException("default");

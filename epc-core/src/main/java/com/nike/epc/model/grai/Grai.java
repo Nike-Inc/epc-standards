@@ -8,6 +8,8 @@
  */
 package com.nike.epc.model.grai;
 
+import com.nike.epc.model.DecodedUri;
+
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /**
@@ -17,7 +19,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  * <p>In the epc uris, the companyPrefix and assetType will both be zero padded such that when they
  * are concatenated, the resultant string is 12 digits.
  */
-public class Grai {
+public class Grai extends DecodedUri.Unimplemented {
   private final String companyPrefix, assetType, serialNumber;
 
   private Grai(String companyPrefix, String assetType, String serialNumber) {

@@ -58,8 +58,10 @@ public class EpcScheme {
   private final Bic bic;
   private final Xndt xndt;
 
+  private final DecodedUri decodedEpc;
+
   private EpcScheme(Sgtin sgtin) {
-    this.sgtin = sgtin;
+    this.decodedEpc = this.sgtin = sgtin;
     this.sscc = null;
     this.sgln = null;
     this.grai = null;
@@ -93,7 +95,7 @@ public class EpcScheme {
 
   private EpcScheme(Sscc sscc) {
     this.sgtin = null;
-    this.sscc = sscc;
+    this.decodedEpc = this.sscc = sscc;
     this.sgln = null;
     this.grai = null;
     this.giai = null;
@@ -127,7 +129,7 @@ public class EpcScheme {
   private EpcScheme(Sgln sgln) {
     this.sgtin = null;
     this.sscc = null;
-    this.sgln = sgln;
+    this.decodedEpc = this.sgln = sgln;
     this.grai = null;
     this.giai = null;
     this.gsrn = null;
@@ -161,7 +163,7 @@ public class EpcScheme {
     this.sgtin = null;
     this.sscc = null;
     this.sgln = null;
-    this.grai = grai;
+    this.decodedEpc = this.grai = grai;
     this.giai = null;
     this.gsrn = null;
     this.gsrnp = null;
@@ -195,7 +197,7 @@ public class EpcScheme {
     this.sscc = null;
     this.sgln = null;
     this.grai = null;
-    this.giai = giai;
+    this.decodedEpc = this.giai = giai;
     this.gsrn = null;
     this.gsrnp = null;
     this.gdti = null;
@@ -229,7 +231,7 @@ public class EpcScheme {
     this.sgln = null;
     this.grai = null;
     this.giai = null;
-    this.gsrn = gsrn;
+    this.decodedEpc = this.gsrn = gsrn;
     this.gsrnp = null;
     this.gdti = null;
     this.cpi = null;
@@ -263,7 +265,7 @@ public class EpcScheme {
     this.grai = null;
     this.giai = null;
     this.gsrn = null;
-    this.gsrnp = gsrnp;
+    this.decodedEpc = this.gsrnp = gsrnp;
     this.gdti = null;
     this.cpi = null;
     this.sgcn = null;
@@ -297,7 +299,7 @@ public class EpcScheme {
     this.giai = null;
     this.gsrn = null;
     this.gsrnp = null;
-    this.gdti = gdti;
+    this.decodedEpc = this.gdti = gdti;
     this.cpi = null;
     this.sgcn = null;
     this.ginc = null;
@@ -331,7 +333,7 @@ public class EpcScheme {
     this.gsrn = null;
     this.gsrnp = null;
     this.gdti = null;
-    this.cpi = cpi;
+    this.decodedEpc = this.cpi = cpi;
     this.sgcn = null;
     this.ginc = null;
     this.gsin = null;
@@ -365,7 +367,7 @@ public class EpcScheme {
     this.gsrnp = null;
     this.gdti = null;
     this.cpi = null;
-    this.sgcn = sgcn;
+    this.decodedEpc = this.sgcn = sgcn;
     this.ginc = null;
     this.gsin = null;
     this.itip = null;
@@ -399,7 +401,7 @@ public class EpcScheme {
     this.gdti = null;
     this.cpi = null;
     this.sgcn = null;
-    this.ginc = ginc;
+    this.decodedEpc = this.ginc = ginc;
     this.gsin = null;
     this.itip = null;
     this.gid = null;
@@ -433,7 +435,7 @@ public class EpcScheme {
     this.cpi = null;
     this.sgcn = null;
     this.ginc = null;
-    this.gsin = gsin;
+    this.decodedEpc = this.gsin = gsin;
     this.itip = null;
     this.gid = null;
     this.dod = null;
@@ -467,7 +469,7 @@ public class EpcScheme {
     this.sgcn = null;
     this.ginc = null;
     this.gsin = null;
-    this.itip = itip;
+    this.decodedEpc = this.itip = itip;
     this.gid = null;
     this.dod = null;
     this.adi = null;
@@ -501,7 +503,7 @@ public class EpcScheme {
     this.ginc = null;
     this.gsin = null;
     this.itip = null;
-    this.gid = gid;
+    this.decodedEpc = this.gid = gid;
     this.dod = null;
     this.adi = null;
     this.bic = null;
@@ -535,7 +537,7 @@ public class EpcScheme {
     this.gsin = null;
     this.itip = null;
     this.gid = null;
-    this.dod = dod;
+    this.decodedEpc = this.dod = dod;
     this.adi = null;
     this.bic = null;
     this.xndt = null;
@@ -569,7 +571,7 @@ public class EpcScheme {
     this.itip = null;
     this.gid = null;
     this.dod = null;
-    this.adi = adi;
+    this.decodedEpc = this.adi = adi;
     this.bic = null;
     this.xndt = null;
   }
@@ -603,7 +605,7 @@ public class EpcScheme {
     this.gid = null;
     this.dod = null;
     this.adi = null;
-    this.bic = bic;
+    this.decodedEpc = this.bic = bic;
     this.xndt = null;
   }
 
@@ -637,7 +639,7 @@ public class EpcScheme {
     this.dod = null;
     this.adi = null;
     this.bic = null;
-    this.xndt = xndt;
+    this.decodedEpc = this.xndt = xndt;
   }
 
   public static EpcScheme xndt(Xndt xndt) {
@@ -650,5 +652,13 @@ public class EpcScheme {
 
   public Optional<Xndt> xndt() {
     return Optional.ofNullable(xndt);
+  }
+
+  public String tagUri() {
+    return this.decodedEpc.tagUri();
+  }
+
+  public String pureIdentityUri() {
+    return this.decodedEpc.pureIdentityUri();
   }
 }

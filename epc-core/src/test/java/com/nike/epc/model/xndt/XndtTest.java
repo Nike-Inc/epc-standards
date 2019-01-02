@@ -22,7 +22,7 @@ public class XndtTest {
     // 1110 0011 0001 0000 0001 1001 1111 0101 1001 1111 0101 1001 1111 0101 1001 0110 0101 1001
     // 0000 0000 0000 0000 0000 1010
     RawBits bits = RawBits.fromHex("E31019F59F59F5965900000A");
-    Xndt xndt = Xndt.fromBits(bits);
+    Xndt xndt = Xndt.fromBits(bits, 96);
 
     assertEquals(1, xndt.displayCode());
     assertEquals("Z9Z9Z9", xndt.style());

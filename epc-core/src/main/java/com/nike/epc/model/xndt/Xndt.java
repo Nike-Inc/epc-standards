@@ -23,13 +23,14 @@ import com.nike.epc.model.*;
  * SEQUENCE: 39-0 bits Bit Range : EPC_HEADER : 8 bits : DISPLAY_CODE : 4 bits : STYLE : 36 bits :
  * 12 Base64 COLOR : 18 bits : 6 Base64 SEQUENCE : 30 bits : Max Sequence : 1073741823 (2^30 -1)
  */
-public final class Xndt {
+public final class Xndt implements DecodedUri {
 
-  private byte displayCode;
-  private String style;
-  private String color;
-  private String styleColor;
-  private int serialNumber;
+  private final byte displayCode;
+  private final String style;
+  private final String color;
+  private final String styleColor;
+  private final int serialNumber;
+  private final int size;
 
   private static final int XNDT_LENGTH = 96;
   private static final int EPC_HEADER_MSB = 95;
@@ -51,15 +52,16 @@ public final class Xndt {
   private static final int STYLE_PADDING = STYLE_DIGITS_FIELD_LENGTHS;
   private static final int COLOR_PADDING = COLOR_DIGITS_FIELD_LENGTHS;
 
-  private Xndt(byte displayCode, String style, String color, int serialNumber) {
+  private Xndt(byte displayCode, String style, String color, int serialNumber, int size) {
     this.displayCode = displayCode;
     this.style = style;
     this.color = color;
     this.serialNumber = serialNumber;
     this.styleColor = style + "-" + color;
+    this.size = size;
   }
 
-  public static Xndt fromBits(RawBits bits) {
+  public static Xndt fromBits(RawBits bits, int size) {
     // [8, 12) - 4 bits
     byte displayCode = bits.getByte(8, 4);
 
@@ -72,7 +74,18 @@ public final class Xndt {
     // [72, 96) - 24 bits
     int sequence = bits.getInt(72, 24);
 
-    return new Xndt(displayCode, style, color, sequence);
+    return new Xndt(displayCode, style, color, sequence, size);
+  }
+
+  @Override
+  public String tagUri() {
+    return String.format(
+        "urn:epc:tag:xndt-%d:%d.%s.%s.%s", size, displayCode, style, color, serialNumber);
+  }
+
+  @Override
+  public String pureIdentityUri() {
+    return String.format("urn:epc:id:xndt:%s.%s.%s.%s", displayCode, style, color, serialNumber);
   }
 
   public byte displayCode() {

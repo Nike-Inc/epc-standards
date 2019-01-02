@@ -8,6 +8,8 @@
  */
 package com.nike.epc.model.sgcn;
 
+import com.nike.epc.model.DecodedUri;
+
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /**
@@ -19,7 +21,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  * <p>In the epc uris, the companyPrefix and couponReference will both be zero padded such that when
  * they are concatenated, the resultant string is 12 digits.
  */
-public class Sgcn {
+public class Sgcn extends DecodedUri.Unimplemented {
   private final String companyPrefix, couponReference, serialComponent;
 
   private Sgcn(String companyPrefix, String couponReference, String serialComponent) {

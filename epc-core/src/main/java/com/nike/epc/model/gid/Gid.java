@@ -8,6 +8,8 @@
  */
 package com.nike.epc.model.gid;
 
+import com.nike.epc.model.DecodedUri;
+
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /**
@@ -17,7 +19,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  * <p>The generalManagerNumber dentifies an organisational entity responsible for maintaining the
  * numbers in the other fields as unique.
  */
-public class Gid {
+public class Gid extends DecodedUri.Unimplemented {
   private final String generalManagerNumber, objectClass, serialNumber;
 
   private Gid(String generalManagerNumber, String objectClass, String serialNumber) {
