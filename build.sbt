@@ -44,14 +44,9 @@ lazy val `epc-standards` = (project in file("."))
   )
   .aggregate(`epc-core`)
 
-lazy val Benchmark = config("bench") extend Test
-
 lazy val `epc-core` = (project in file("./epc-core"))
   .settings(
     autoScalaLibrary := false,
-    testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
-    parallelExecution in Benchmark := false,
-    logBuffered := false,
     jacocoReportSettings := JacocoReportSettings(
       title = "Epc-Standards Project Coverage",
       formats = Seq(JacocoReportFormats.ScalaHTML, JacocoReportFormats.XML)
@@ -69,9 +64,17 @@ lazy val `epc-core` = (project in file("./epc-core"))
     libraryDependencies ++= Seq(
       "org.junit.jupiter" % "junit-jupiter-api" % "5.3.1" % Test,
       "commons-lang" % "commons-lang" % "2.6" % Test,
-      "com.storm-enroute" %% "scalameter" % "0.8.2" % Benchmark,
-      "epctagcoder" % "epctagcoder" % "0.0.5" % Benchmark from "https://github.com/jlcout/epctagcoder/releases/download/v0.0.5/epctagcoder-0.0.5-SNAPSHOT.jar",
     )
   )
-  .configs(Benchmark)
-  .settings(inConfig(Benchmark)(Defaults.testSettings): _*)
+
+lazy val benchmark = (project in file("./benchmark"))
+  .dependsOn(`epc-core`)
+  .settings(
+    testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
+    parallelExecution in Test := false,
+    logBuffered := false,
+    libraryDependencies ++= Seq(
+      "com.storm-enroute" %% "scalameter" % "0.8.2" % Test,
+      "epctagcoder" % "epctagcoder" % "0.0.5" % Test from "https://github.com/jlcout/epctagcoder/releases/download/v0.0.5/epctagcoder-0.0.5-SNAPSHOT.jar",
+    )
+  )

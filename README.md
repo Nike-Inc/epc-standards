@@ -58,7 +58,7 @@ A major goal of epc-standards is to be fast. We've included some basic benchmark
 The graph below was produced using a mid 2015 MacBook Pro using the following command from the root of the project:
 
 ``` shell
-$ sbt bench:test
+$ sbt benchmark/test
 ```
 
 ![benchmark][benchmark img]
