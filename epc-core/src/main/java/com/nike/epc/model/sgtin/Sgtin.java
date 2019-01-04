@@ -114,47 +114,4 @@ public final class Sgtin {
         filter);
   }
 
-  // public static final class Builder {
-  //   private String companyPrefix, indicator, gs1ItemReference, serialNumber;
-
-  //   private Builder() {}
-
-  //   public Builder withCompanyPrefix(String companyPrefix) {
-  //     this.companyPrefix = companyPrefix;
-  //     return this;
-  //   }
-
-  //   public Builder withIndicator(String indicator) {
-  //     this.indicator = indicator;
-  //     return this;
-  //   }
-
-  //   public Builder withItemReference(String indicatorPlusGs1ItemReference) {
-  //     this.indicator = indicatorPlusGs1ItemReference.substring(0, 1);
-  //     this.gs1ItemReference = indicatorPlusGs1ItemReference.substring(1);
-  //     return this;
-  //   }
-
-  //   public Builder withGs1ItemReference(String itemReference) {
-  //     this.gs1ItemReference = itemReference;
-  //     return this;
-  //   }
-
-  //   public Builder withSerialNumber(String serialNumber) {
-  //     this.serialNumber = serialNumber;
-  //     return this;
-  //   }
-
-  //   public Sgtin build() {
-  //     return new Sgtin(
-  //         notNullOrEmpty(companyPrefix),
-  //         notNullOrEmpty(indicator),
-  //         notNullOrEmpty(gs1ItemReference),
-  //         notNullOrEmpty(serialNumber));
-  //   }
-  // }
-
-  // public static Builder builder() {
-  //   return new Builder();
-  // }
 }
