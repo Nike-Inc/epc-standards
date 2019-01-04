@@ -84,7 +84,7 @@ public class Epc {
    * <p>SGTIN: urn:epc:id:sgtin:PaddedCompanyPrefix.PaddedItemRef.SerialNumber
    */
   public String pureIdentityUri() {
-    return UriEncoder.encodePureIdentityUri(scheme);
+    return UriSerializer.serializePureIdentityUri(scheme);
   }
 
   /*
@@ -94,7 +94,7 @@ public class Epc {
    *  required at write time.
    */
   public String tagUri() {
-    return UriEncoder.encodeTagUri(scheme);
+    return UriSerializer.serializeTagUri(scheme);
   }
 
   private static final Integer SGTIN_96_SERIAL_BIT_SIZE = 38;

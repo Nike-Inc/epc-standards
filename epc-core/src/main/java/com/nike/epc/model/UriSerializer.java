@@ -16,39 +16,38 @@ import java.util.Optional;
 
 import java.util.Date;
 
-abstract class UriEncoder {
-  static String encodeTagUri(EpcScheme scheme) throws UnsupportedOperationException {
+abstract class UriSerializer {
+  static String serializeTagUri(EpcScheme scheme) throws UnsupportedOperationException {
     return scheme
         .sgtin()
-        .map(sgtinEncoder::encodeTagUri)
+        .map(sgtinSerializer::serializeTagUri)
         .map(Optional::of)
-        .orElseGet(() -> scheme.xndt().map(xndtEncoder::encodeTagUri))
+        .orElseGet(() -> scheme.xndt().map(xndtSerializer::serializeTagUri))
         .orElseThrow(
             () -> new UnsupportedOperationException("tagUri not yet implemented for this scheme"));
   }
 
-  static String encodePureIdentityUri(EpcScheme scheme) throws UnsupportedOperationException {
+  static String serializePureIdentityUri(EpcScheme scheme) throws UnsupportedOperationException {
     return scheme
         .sgtin()
-        .map(sgtinEncoder::encodePureIdentityUri)
+        .map(sgtinSerializer::serializePureIdentityUri)
         .map(Optional::of)
-        .orElseGet(() -> scheme.xndt().map(xndtEncoder::encodePureIdentityUri))
+        .orElseGet(() -> scheme.xndt().map(xndtSerializer::serializePureIdentityUri))
         .orElseThrow(
             () ->
                 new UnsupportedOperationException(
                     "pureIdentityUri not yet implemented for this scheme"));
   }
 
-  private interface Encoder<A> {
-    String encodeTagUri(A a);
+  private interface Serializer<A> {
+    String serializeTagUri(A a);
 
-    String encodePureIdentityUri(A a);
+    String serializePureIdentityUri(A a);
   }
 
-  private static Encoder<Sgtin> sgtinEncoder =
-      new Encoder<Sgtin>() {
-
-        public String encodeTagUri(Sgtin sgtin) {
+  private static Serializer<Sgtin> sgtinSerializer =
+      new Serializer<Sgtin>() {
+        public String serializeTagUri(Sgtin sgtin) {
           return String.format(
               "urn:epc:tag:sgtin-%d:%s.%s.%s.%s",
               sgtin.size(),
@@ -58,22 +57,22 @@ abstract class UriEncoder {
               sgtin.serialNumber());
         }
 
-        public String encodePureIdentityUri(Sgtin sgtin) {
+        public String serializePureIdentityUri(Sgtin sgtin) {
           return String.format(
               "urn:epc:id:sgtin:%s.%s.%s",
               sgtin.companyPrefix(), sgtin.itemReference(), sgtin.serialNumber());
         }
       };
 
-  private static Encoder<Xndt> xndtEncoder =
-      new Encoder<Xndt>() {
-        public String encodeTagUri(Xndt xndt) {
+  private static Serializer<Xndt> xndtSerializer =
+      new Serializer<Xndt>() {
+        public String serializeTagUri(Xndt xndt) {
           return String.format(
               "urn:epc:tag:xndt-%d:%d.%s.%s.%s",
               xndt.size(), xndt.displayCode(), xndt.style(), xndt.color(), xndt.serialNumber());
         }
 
-        public String encodePureIdentityUri(Xndt xndt) {
+        public String serializePureIdentityUri(Xndt xndt) {
           return String.format(
               "urn:epc:id:xndt:%s.%s.%s.%s",
               xndt.displayCode(), xndt.style(), xndt.color(), xndt.serialNumber());
