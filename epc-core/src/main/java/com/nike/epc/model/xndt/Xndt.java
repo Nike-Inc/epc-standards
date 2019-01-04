@@ -25,11 +25,12 @@ import com.nike.epc.model.*;
  */
 public final class Xndt {
 
-  private byte displayCode;
-  private String style;
-  private String color;
-  private String styleColor;
-  private int serialNumber;
+  private final byte displayCode;
+  private final String style;
+  private final String color;
+  private final String styleColor;
+  private final int serialNumber;
+  private final int size;
 
   private static final int XNDT_LENGTH = 96;
   private static final int EPC_HEADER_MSB = 95;
@@ -51,15 +52,16 @@ public final class Xndt {
   private static final int STYLE_PADDING = STYLE_DIGITS_FIELD_LENGTHS;
   private static final int COLOR_PADDING = COLOR_DIGITS_FIELD_LENGTHS;
 
-  private Xndt(byte displayCode, String style, String color, int serialNumber) {
+  private Xndt(byte displayCode, String style, String color, int serialNumber, int size) {
     this.displayCode = displayCode;
     this.style = style;
     this.color = color;
     this.serialNumber = serialNumber;
     this.styleColor = style + "-" + color;
+    this.size = size;
   }
 
-  public static Xndt fromBits(RawBits bits) {
+  public static Xndt fromBits(RawBits bits, int size) {
     // [8, 12) - 4 bits
     byte displayCode = bits.getByte(8, 4);
 
@@ -72,7 +74,7 @@ public final class Xndt {
     // [72, 96) - 24 bits
     int sequence = bits.getInt(72, 24);
 
-    return new Xndt(displayCode, style, color, sequence);
+    return new Xndt(displayCode, style, color, sequence, size);
   }
 
   public byte displayCode() {
@@ -93,5 +95,9 @@ public final class Xndt {
 
   public int serialNumber() {
     return this.serialNumber;
+  }
+
+  public int size() {
+    return this.size;
   }
 }

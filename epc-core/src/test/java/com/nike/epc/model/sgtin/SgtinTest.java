@@ -18,7 +18,7 @@ public class SgtinTest {
   @Test
   public void parseSgtin() {
     RawBits bits = RawBits.fromHex("30185E78003ECB006E2DA00E");
-    Sgtin sgtin = Sgtin.fromBits(bits, 6);
+    Sgtin sgtin = Sgtin.fromBits(bits, 6, 0, (byte) 0);
 
     assertEquals("096736", sgtin.companyPrefix());
     assertEquals("0064300", sgtin.itemReference());
