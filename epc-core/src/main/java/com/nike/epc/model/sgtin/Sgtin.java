@@ -12,7 +12,7 @@ import com.nike.epc.model.*;
 
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
-public final class Sgtin implements DecodedUri {
+public final class Sgtin {
   private final String companyPrefix, indicator, gs1ItemReference, serialNumber;
   private final int size;
   private final byte filter;
@@ -30,19 +30,6 @@ public final class Sgtin implements DecodedUri {
     this.serialNumber = serialNumber;
     this.size = size;
     this.filter = filter;
-  }
-
-  @Override
-  public String tagUri() {
-    return String.format(
-        "urn:epc:tag:sgtin-%d:%s.%s.%s.%s",
-        size, filter, companyPrefix(), itemReference(), serialNumber());
-  }
-
-  @Override
-  public String pureIdentityUri() {
-    return String.format(
-        "urn:epc:id:sgtin:%s.%s.%s", companyPrefix(), itemReference(), serialNumber());
   }
 
   public String companyPrefix() {
@@ -63,6 +50,14 @@ public final class Sgtin implements DecodedUri {
 
   public String serialNumber() {
     return serialNumber;
+  }
+
+  public int size() {
+    return size;
+  }
+
+  public byte filter() {
+    return filter;
   }
 
   /*

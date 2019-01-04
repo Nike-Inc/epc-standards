@@ -8,8 +8,6 @@
  */
 package com.nike.epc.model.ginc;
 
-import com.nike.epc.model.DecodedUri;
-
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /**
@@ -19,7 +17,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  *
  * <p>In the epc uris, the companyPrefix may be zero padded.
  */
-public class Ginc extends DecodedUri.Unimplemented {
+public class Ginc {
   private final String companyPrefix, consignmentReference;
 
   private Ginc(String companyPrefix, String consignmentReference) {

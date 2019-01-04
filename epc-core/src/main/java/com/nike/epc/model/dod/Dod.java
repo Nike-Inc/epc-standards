@@ -8,8 +8,6 @@
  */
 package com.nike.epc.model.dod;
 
-import com.nike.epc.model.DecodedUri;
-
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 import static com.nike.epc.util.Validation.oneOf;
 
@@ -29,7 +27,7 @@ import static com.nike.epc.util.Validation.oneOf;
  * Company Prefix may use any of the identity types and encoding instructions described in the EPC™
  * Tag Data Standards document to encode tags.”
  */
-public class Dod extends DecodedUri.Unimplemented {
+public class Dod {
   private final String cageCode, dodAac, serialNumber;
 
   private Dod(String cageCode, String dodAac, String serialNumber) {

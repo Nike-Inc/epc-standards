@@ -8,8 +8,6 @@
  */
 package com.nike.epc.model.itip;
 
-import com.nike.epc.model.DecodedUri;
-
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /**
@@ -24,7 +22,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  * concatenated, the resultant string is 4 digits. The result of concatenating the companyPrefix,
  * itemReference, indicator, piece, and total, will have 17 digits.
  */
-public class Itip extends DecodedUri.Unimplemented {
+public class Itip {
   private final String companyPrefix, itemReference, indicator, piece, total, serialNumber;
 
   private Itip(

@@ -8,8 +8,6 @@
  */
 package com.nike.epc.model.giai;
 
-import com.nike.epc.model.DecodedUri;
-
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /**
@@ -18,7 +16,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  *
  * <p>In the epc uris, the companyPrefix may be zero padded.
  */
-public class Giai extends DecodedUri.Unimplemented {
+public class Giai {
   private final String companyPrefix, individualAssetReference;
 
   private Giai(String companyPrefix, String individualAssetReference) {

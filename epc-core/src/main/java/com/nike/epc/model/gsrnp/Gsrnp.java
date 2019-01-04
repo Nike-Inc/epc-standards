@@ -8,8 +8,6 @@
  */
 package com.nike.epc.model.gsrnp;
 
-import com.nike.epc.model.DecodedUri;
-
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /*
@@ -22,7 +20,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  *
  *  The serviceReference should be assigned by the managing entity to a particular service provider.
  */
-public class Gsrnp extends DecodedUri.Unimplemented {
+public class Gsrnp {
   private final String companyPrefix, serviceReference;
 
   private Gsrnp(String companyPrefix, String serviceReference) {

@@ -8,8 +8,6 @@
  */
 package com.nike.epc.model.cpi;
 
-import com.nike.epc.model.DecodedUri;
-
 import com.nike.epc.util.Validation;
 
 /**
@@ -20,7 +18,7 @@ import com.nike.epc.util.Validation;
  * <p>In the epc uris, the companyPrefix and componentPartReference may both be zero padded such
  * that when they are concatenated, the resultant string is at most 15 digits.
  */
-public class Cpi extends DecodedUri.Unimplemented {
+public class Cpi {
   private final String companyPrefix, componentPartReference, serialNumber;
 
   private Cpi(String companyPrefix, String componentPartReference, String serialNumber) {

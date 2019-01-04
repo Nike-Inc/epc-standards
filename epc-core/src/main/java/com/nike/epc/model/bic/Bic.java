@@ -8,7 +8,6 @@
  */
 package com.nike.epc.model.bic;
 
-import com.nike.epc.model.DecodedUri;
 import com.nike.epc.util.Validation;
 
 /**
@@ -21,7 +20,7 @@ import com.nike.epc.util.Validation;
  *
  * <p>In the epc uris, the individual elements of the BIC are not separated by dots.
  */
-public class Bic extends DecodedUri.Unimplemented {
+public class Bic {
   private final String ownerCode, equipmentCategoryIdentifier, serialNumber, checkDigit;
 
   private Bic(

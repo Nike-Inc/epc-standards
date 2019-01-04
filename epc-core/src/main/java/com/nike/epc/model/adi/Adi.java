@@ -8,7 +8,6 @@
  */
 package com.nike.epc.model.adi;
 
-import com.nike.epc.model.DecodedUri;
 import com.nike.epc.util.Validation;
 
 /**
@@ -19,7 +18,7 @@ import com.nike.epc.util.Validation;
  * The ADI EPC construct provides a mechanism to directly encode such unique identifiers in RFID
  * tags and to use the URI representations at other layers of the EPCglobal architecture.
  */
-public class Adi extends DecodedUri.Unimplemented {
+public class Adi {
   private final String cageCode, dodAac, adiComponent, adiExtendedComponent;
 
   private Adi(String cageCode, String dodAac, String adiComponent, String adiExtendedComponent) {

@@ -8,8 +8,6 @@
  */
 package com.nike.epc.model.gdti;
 
-import com.nike.epc.model.DecodedUri;
-
 import static com.nike.epc.util.Validation.notNullOrEmpty;
 
 /**
@@ -20,7 +18,7 @@ import static com.nike.epc.util.Validation.notNullOrEmpty;
  * <p>In the epc uris, the companyPrefix and documentType will both be zero padded such that when
  * they are concatenated, the resultant string is 12 digits.
  */
-public class Gdti extends DecodedUri.Unimplemented {
+public class Gdti {
   private final String companyPrefix, documentType, serialNumber;
 
   private Gdti(String companyPrefix, String documentType, String serialNumber) {

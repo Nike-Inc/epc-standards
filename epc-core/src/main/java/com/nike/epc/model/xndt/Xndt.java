@@ -23,7 +23,7 @@ import com.nike.epc.model.*;
  * SEQUENCE: 39-0 bits Bit Range : EPC_HEADER : 8 bits : DISPLAY_CODE : 4 bits : STYLE : 36 bits :
  * 12 Base64 COLOR : 18 bits : 6 Base64 SEQUENCE : 30 bits : Max Sequence : 1073741823 (2^30 -1)
  */
-public final class Xndt implements DecodedUri {
+public final class Xndt {
 
   private final byte displayCode;
   private final String style;
@@ -77,17 +77,6 @@ public final class Xndt implements DecodedUri {
     return new Xndt(displayCode, style, color, sequence, size);
   }
 
-  @Override
-  public String tagUri() {
-    return String.format(
-        "urn:epc:tag:xndt-%d:%d.%s.%s.%s", size, displayCode, style, color, serialNumber);
-  }
-
-  @Override
-  public String pureIdentityUri() {
-    return String.format("urn:epc:id:xndt:%s.%s.%s.%s", displayCode, style, color, serialNumber);
-  }
-
   public byte displayCode() {
     return this.displayCode;
   }
@@ -106,5 +95,9 @@ public final class Xndt implements DecodedUri {
 
   public int serialNumber() {
     return this.serialNumber;
+  }
+
+  public int size() {
+    return this.size;
   }
 }
