@@ -19,33 +19,38 @@ Currently only SGTIN-96 and a custom Nike display tag format (XNDT) are supporte
 
 ## Usage
 
-Currently epc-standards has no artifacts published. The easiest way to get going right now is to publish locally with sbt:
-
-``` shell
-$ sbt publishLocal
-```
-
-Then in your project you can include the dependency.
-
 ### SBT
 
 ``` scala
-libraryDependencies += "com.nike.epc" % "epc-core" % "0-SNAPSHOT"
+resolvers in ThisBuild += "oss-nike" at "https://dl.bintray.com/nike/maven"
+libraryDependencies += "com.nike.epc" % "epc-core" % "1.0.0"
 ```
 
 ### Gradle
 
 ``` groovy
-compile group: 'com.nike.epc', name: 'epc-core', version: '0-SNAPSHOT'
+repositories {
+    maven {
+      url 'https://dl.bintray.com/nike/maven'
+    }
+}
+
+compile group: 'com.nike.epc', name: 'epc-core', version: '1.0.0'
 ```
 
 ### Maven
 
 ``` xml
+<repository>
+  <id>nike-oss</id>
+  <name>Nike OSS</name>
+  <url>https://dl.bintray.com/nike/maven</url>
+</repository>
+
 <dependency>
   <groupId>com.nike.epc</groupId>
   <artifactId>epc-core</artifactId>
-  <version>0-SNAPSHOT</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
