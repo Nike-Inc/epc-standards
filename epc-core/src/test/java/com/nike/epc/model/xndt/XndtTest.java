@@ -30,4 +30,15 @@ public class XndtTest {
     assertEquals("Z9Z9Z9-ZZZ", xndt.styleColor());
     assertEquals(10, xndt.serialNumber());
   }
+
+  @Test
+  public void praseWithoutDroppingLeadingA() {
+    // Q4312-600
+    RawBits bits = RawBits.fromHex("E31000438DF5DBAD3400001E");
+    Xndt xndt = Xndt.fromBits(bits, 96);
+
+    assertEquals("AQ4312", xndt.style());
+    assertEquals("600", xndt.color());
+    assertEquals("AQ4312-600", xndt.styleColor());
+  }
 }

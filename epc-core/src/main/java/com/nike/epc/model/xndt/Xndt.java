@@ -67,6 +67,13 @@ public final class Xndt {
 
     // [12, 54) - 42 bits
     String style = bits.getBase64Decoded(12, 42);
+    // This is an ugly hack to deal with styles with leading As that
+    // are 6 digits. No style will be less than 6 digits. If a style
+    // is 7 digits and starts with A it will still be broken. Encoding
+    // of these will need to be modified to fully resolve this issue.
+    while (style.length() < 6) {
+      style = 'A' + style;
+    }
 
     // [54, 72) - 18 bits
     String color = bits.getBase64Decoded(54, 18);
