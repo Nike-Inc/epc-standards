@@ -20,9 +20,15 @@ startYear in ThisBuild := Some(2018)
 description in ThisBuild := "A library for working with standards from the EPC extension to the GS1 standard"
 crossPaths in ThisBuild := false
 
-bintrayOrganization in ThisBuild := Some("nike")
-bintrayRepository in ThisBuild := "maven"
-bintrayPackage in ThisBuild := "epc-standards"
+publishTo in ThisBuild := {
+  val repo = "https://artifactory.nike.com/artifactory/maven"
+  if (isSnapshot.value) {
+    Some("snapshots" at s"$repo-snapshots")
+  } else {
+    Some("releases" at repo)
+  }
+}
+credentials in ThisBuild += Credentials(Path.userHome / ".ivy2" / ".credentials")
 
 version in ThisBuild := sys.env.get("TRAVIS_TAG").filter(_.trim.nonEmpty).getOrElse("0-SNAPSHOT")
 
