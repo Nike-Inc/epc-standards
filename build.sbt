@@ -20,8 +20,6 @@ startYear in ThisBuild := Some(2018)
 description in ThisBuild := "A library for working with standards from the EPC extension to the GS1 standard"
 crossPaths in ThisBuild := false
 
-version in ThisBuild := sys.env.get("TRAVIS_TAG").filter(_.trim.nonEmpty).getOrElse("0-DO-NOT-PUBLISH")
-
 publishTo in ThisBuild := {
   val repo = "https://artifactory.nike.com/artifactory/maven"
   if (isSnapshot.value) {
@@ -36,15 +34,10 @@ lazy val ci = TaskKey[Unit]("ci")
 
 lazy val `epc-standards` = (project in file("."))
   .settings(
+    publishArtifact := false,
     ci := Def.taskDyn {
-      if (version.value.endsWith("-DO-NOT-PUBLISH")) {
-        Def.task {
-          (`epc-core` / (jacoco in Test)).value
-        }
-      } else {
-        Def.task {
-          (`epc-core` / publish).dependsOn((`epc-core` / (jacoco in Test))).value
-        }
+      Def.task {
+        (`epc-core` / publish).dependsOn((`epc-core` / (jacoco in Test))).value
       }
     }.value
   )
