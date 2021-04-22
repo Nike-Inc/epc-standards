@@ -20,25 +20,24 @@ startYear in ThisBuild := Some(2018)
 description in ThisBuild := "A library for working with standards from the EPC extension to the GS1 standard"
 crossPaths in ThisBuild := false
 
-bintrayOrganization in ThisBuild := Some("nike")
-bintrayRepository in ThisBuild := "maven"
-bintrayPackage in ThisBuild := "epc-standards"
-
-version in ThisBuild := sys.env.get("TRAVIS_TAG").filter(_.trim.nonEmpty).getOrElse("0-SNAPSHOT")
+publishTo in ThisBuild := {
+  val repo = "https://artifactory.nike.com/artifactory/maven"
+  if (isSnapshot.value) {
+    Some("snapshots" at s"$repo-snapshots")
+  } else {
+    Some("releases" at repo)
+  }
+}
+credentials in ThisBuild += Credentials(Path.userHome / ".ivy2" / ".credentials")
 
 lazy val ci = TaskKey[Unit]("ci")
 
 lazy val `epc-standards` = (project in file("."))
   .settings(
+    publishArtifact := false,
     ci := Def.taskDyn {
-      if (version.value.endsWith("-SNAPSHOT")) {
-        Def.task {
-          (`epc-core` / (jacoco in Test)).value
-        }
-      } else {
-        Def.task {
-          (`epc-core` / publish).dependsOn((`epc-core` / (jacoco in Test))).value
-        }
+      Def.task {
+        (`epc-core` / publish).dependsOn((`epc-core` / (jacoco in Test))).value
       }
     }.value
   )

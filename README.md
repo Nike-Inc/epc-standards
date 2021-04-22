@@ -22,7 +22,7 @@ Currently only SGTIN-96 and a custom Nike display tag format (XNDT) are supporte
 ### SBT
 
 ``` scala
-resolvers in ThisBuild += "oss-nike" at "https://dl.bintray.com/nike/maven"
+resolvers in ThisBuild += "nike-oss" at "https://artifactory.nike.com/artifactory/maven"
 libraryDependencies += "com.nike.epc" % "epc-core" % "1.0.0"
 ```
 
@@ -31,11 +31,11 @@ libraryDependencies += "com.nike.epc" % "epc-core" % "1.0.0"
 ``` groovy
 repositories {
     maven {
-      url 'https://dl.bintray.com/nike/maven'
+      url 'https://artifactory.nike.com/artifactory/maven'
     }
 }
 
-compile group: 'com.nike.epc', name: 'epc-core', version: '1.0.0'
+compile group: 'com.nike.epc', name: 'epc-core', version: '1.0.0', ext: 'pom'
 ```
 
 ### Maven
@@ -44,13 +44,14 @@ compile group: 'com.nike.epc', name: 'epc-core', version: '1.0.0'
 <repository>
   <id>nike-oss</id>
   <name>Nike OSS</name>
-  <url>https://dl.bintray.com/nike/maven</url>
+  <url>https://artifactory.nike.com/artifactory/maven</url>
 </repository>
 
 <dependency>
   <groupId>com.nike.epc</groupId>
   <artifactId>epc-core</artifactId>
   <version>1.0.0</version>
+  <type>pom</type>
 </dependency>
 ```
 
